@@ -1,5 +1,6 @@
 // Import React
 import React from "react";
+import { SafeAreaView, StyleSheet } from "react-native";
 
 // Import Font
 import {
@@ -16,10 +17,13 @@ import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-// Import Pages
+// Import Screens
 import Home from "./screens/Home/Home";
 import Trending from "./screens/trending/Trending";
 import Post from "./screens/post/Post";
+
+// Import Headers
+import Header from "./components/header/Header";
 
 // Navigator Type
 export type RootStackParamList = {
@@ -32,6 +36,7 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
+	// Install Fonts
 	let [fontsLoaded] = useFonts({
 		Dosis_400Regular,
 		Dosis_700Bold,
@@ -43,18 +48,32 @@ export default function App() {
 	}
 	return (
 		<>
-			<StatusBar style="dark" backgroundColor="#fff" />
-			<NavigationContainer>
-				<Stack.Navigator initialRouteName="Home">
-					<Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-					<Stack.Screen name="Trending" component={Trending} options={{ headerShown: false }} />
-					<Stack.Screen
-						name="Post"
-						component={Post}
-						options={{ headerShown: false, presentation: "fullScreenModal" }}
-					/>
-				</Stack.Navigator>
-			</NavigationContainer>
+			<StatusBar style="dark" />
+			<SafeAreaView style={stlyes.appWrapper}>
+				<NavigationContainer>
+					<Stack.Navigator
+						initialRouteName="Home"
+						screenOptions={{ header: props => <Header {...props} /> }}
+					>
+						<Stack.Screen name="Home" component={Home} />
+						<Stack.Screen name="Trending" component={Trending} />
+						<Stack.Screen
+							name="Post"
+							component={Post}
+							options={{
+								presentation: "containedModal",
+							}}
+						/>
+					</Stack.Navigator>
+				</NavigationContainer>
+			</SafeAreaView>
 		</>
 	);
 }
+
+const stlyes = StyleSheet.create({
+	appWrapper: {
+		backgroundColor: "#fff",
+		flex: 1,
+	},
+});

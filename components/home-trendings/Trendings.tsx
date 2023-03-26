@@ -3,11 +3,13 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
 // Import Router
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import type { RootStackParamList } from "../App";
+import type { RootStackParamList } from "../../App";
 
-function Trendings(props: {
+interface ITrendings {
 	navigation: NativeStackScreenProps<RootStackParamList, "Home">["navigation"];
-}) {
+}
+
+function Trendings(props: ITrendings) {
 	// Props Destruction
 	const { navigation } = props;
 
@@ -32,7 +34,7 @@ function Trendings(props: {
 							<Text style={styles.postTimeOther}>4 min ago</Text>
 						</View>
 					</View>
-					<Image style={styles.postImage} source={require("../assets/virusbanner.jpeg")} />
+					<Image style={styles.postImage} source={require("../../assets/virusbanner.jpeg")} />
 				</TouchableOpacity>
 				<TouchableOpacity style={styles.post} onPress={() => navigation.navigate("Post")}>
 					<View style={styles.postDesc}>
@@ -45,7 +47,7 @@ function Trendings(props: {
 							<Text style={styles.postTimeOther}>4 min ago</Text>
 						</View>
 					</View>
-					<Image style={styles.postImage} source={require("../assets/virusbanner.jpeg")} />
+					<Image style={styles.postImage} source={require("../../assets/virusbanner.jpeg")} />
 				</TouchableOpacity>
 			</View>
 		</View>
