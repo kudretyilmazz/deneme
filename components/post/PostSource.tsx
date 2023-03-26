@@ -1,16 +1,25 @@
 // Import React
 import React from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet, ImageSourcePropType } from "react-native";
 
-function PostSource() {
+interface IPostSource {
+	name: string;
+	logo: ImageSourcePropType;
+	time: string;
+}
+
+function PostSource(props: IPostSource) {
+	// Props Destruction
+	const { name, logo, time } = props;
+
 	return (
 		<View style={styles.time}>
 			<View style={styles.logoWrapper}>
-				<Image style={styles.timeLogo} source={require("../assets/bbclogo.png")} />
+				<Image style={styles.timeLogo} source={logo} />
 			</View>
 			<View>
-				<Text style={[styles.locationTitle, styles.boldText]}>BBC News</Text>
-				<Text style={styles.timeInfos}>14 min ago</Text>
+				<Text style={[styles.locationTitle, styles.boldText]}>{name}</Text>
+				<Text style={styles.timeInfos}>{time}</Text>
 			</View>
 		</View>
 	);
@@ -35,7 +44,6 @@ const styles = StyleSheet.create({
 	time: {
 		alignItems: "center",
 		flexDirection: "row",
-		paddingHorizontal: 20,
 	},
 	timeLogo: {
 		width: 30,
